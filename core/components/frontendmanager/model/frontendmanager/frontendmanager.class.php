@@ -46,27 +46,29 @@ class frontendManager {
 		if (!empty($this->initialized[$ctx])) {
             return true;
         }
-		$this->modx->regClientCSS($this->config['cssUrl'].'default.css');
-		$this->modx->regClientScript($this->config['jsUrl'].'default.js');
-		$this->modx->regClientStartupHTMLBlock($this->pdoTools->getChunk('tpl.frontendmanager.panel'));
-
-
-		$config_js = array(
-				'ctx' => $ctx,
-				'jsUrl' => $this->config['jsUrl'],
-				'cssUrl' => $this->config['cssUrl'],
-				'actionUrl' => $this->config['actionUrl'],
-				'close_all_message' => $this->modx->lexicon('tickets_message_close_all'),
-				'tpanel' => (int)$this->authenticated,
-				'enable_editor' => (int)$this->modx->getOption('tickets.enable_editor'),
-			);
-			$this->modx->regClientStartupScript('<script type="text/javascript">frontendManagerConfig=' . $this->modx->toJSON($config_js) . ';</script>', true);
-
-
-
-
 		$this->initialized[$ctx] = true;
 
+		$config_js = array(
+			'ctx' => $ctx,
+			'jsUrl' => $this->config['jsUrl'],
+			'cssUrl' => $this->config['cssUrl'],
+		);
+
+		$output = '';
+		$output .= '<script type="text/javascript">frontendManagerConfig=' . $this->modx->toJSON($config_js) . ';</script>';
+		$output .= '<link rel="stylesheet" href="'.$this->config['cssUrl'].'web/'.$this->modx->getOption('frontendmanager_frontend_css', NULL, 'frontend.css').'" type="text/css">';
+		$output .= '<script type="text/javascript" src="'.$this->config['jsUrl'].'web/'.$this->modx->getOption('frontendmanager_frontend_js', NULL, 'frontend.js').'"></script>';
+
+		//$this->modx->regClientStartupScript('<script type="text/javascript">frontendManagerConfig=' . $this->modx->toJSON($config_js) . ';</script>', true);
+		//$this->modx->regClientCSS($this->config['cssUrl'].'web/'.$this->modx->getOption('frontendmanager_frontend_css', NULL, 'frontend.css'));
+		//$this->modx->regClientScript($this->config['jsUrl'].'web/'.$this->modx->getOption('frontendmanager_frontend_js', NULL, 'frontend.js'));
+		//$this->modx->regClientStartupHTMLBlock($this->pdoTools->getChunk($this->modx->getOption('frontendmanager_frontend_tpl', NULL, 'tpl.frontendmanager.panel')));
+
+		$output .= $this->pdoTools->getChunk($this->modx->getOption('frontendmanager_frontend_tpl', NULL, 'tpl.frontendmanager.panel'));
+
+
+
+		return $output;
 	}
 
 

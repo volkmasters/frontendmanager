@@ -1,10 +1,9 @@
 var frontendManager = {
 	initialize: function() {
-		console.log('loadded');
+
 		if (!jQuery().MagnificPopup) {
 			document.write('<script src="' + frontendManagerConfig.jsUrl + 'plugins/jquery.magnific-popup.min.js"><\/script>');
 		}
-
 
 		$('body').addClass('fm');
 
@@ -20,19 +19,9 @@ var frontendManager = {
 	open: function(link){
 			$.magnificPopup.open({
 			  items: {
-			    src: link
+			    src: link + '&frame=1'
 			  },
-			  type: 'iframe',
-			  callbacks: {
-			  	beforeAppend: function() {
-				    // iframe загружен
-				    this.content.find('iframe').on('load', function() {
-				      $(this).contents().find("head").append($("<style type='text/css'>  #modx-header, #modx-leftbar, .x-layout-split, #modx-abtn-duplicate, #modx-abtn-preview, #modx-abtn-cancel, #modx-abtn-help {display:none !important;} #modx-action-buttons {top: 0;} #modx-content {width:100% !important}  </style>"));
-				    });
-				 }
-			  }
-			  // You may add options here, they're exactly the same as for $.fn.magnificPopup call
-			  // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+			  type: 'iframe'
 			}, 0);
 
 	}

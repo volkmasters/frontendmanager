@@ -8,7 +8,7 @@ $tmp = array(
 		'description' => '',
 		'events' => array(
 			'OnWebPagePrerender' => array(),
-			'OnLoadWebDocument' => array()
+			'OnBeforeManagerPageInit' => array(),
 		)
 	)
 

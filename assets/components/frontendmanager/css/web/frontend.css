@@ -1,4 +1,4 @@
-@import "fonts/style.css";
+@import "../fonts/style.css";
 
 .fm-panel {
     background-image: linear-gradient(to right,#3f4850 0,#365462 46%,#3e5554 60%,#42554d 68%,#573d4e 100%);
@@ -23,10 +23,20 @@ body.fm {padding-top: 40px !important;}
     float: left;
     line-height: 40px;
     margin: 0 10px 0px 0;
+    color: #fff;
 }
 
 .fm-panel a.logo img {height: 20px;}
-
+.fm-panel.button {
+    display: inline-block;
+    position: static;
+    padding: 0 15px;
+    color: #fff;
+}
+.fm-panel.button:hover {
+    background: #3B5C69;
+    text-decoration: none;
+}
 
 
 body .mfp-iframe-scaler iframe {
@@ -35,7 +45,17 @@ body .mfp-iframe-scaler iframe {
     border-radius: 5px;
 }
 
-
+@media all and (max-width: 768px) {
+    .fm-text {
+        display:none !important;
+    }
+    .fm-panel a span {
+        margin:0;
+    }
+    body .mfp-iframe-scaler iframe {
+    	margin:5px;
+    }
+}
 
 
 /* Magnific Popup CSS */
